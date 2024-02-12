@@ -1,10 +1,14 @@
 // main.dart
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:wander05/firebase_options.dart';
 import 'package:wander05/login.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 class MyApp extends StatelessWidget {
@@ -12,6 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      routes: { //To cancel going back to the previous page
+        '/login': (context) => LoginPage(), // Add this line to define the '/login' route
+        '/home': (context) => HomePage(), // Add this line to define the '/home' route
+      },
     );
   }
 }

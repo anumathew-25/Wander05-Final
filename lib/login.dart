@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wander05/auth.dart';
+import 'package:wander05/main.dart';
 import 'package:wander05/signup.dart';
 
 void main() {
@@ -96,9 +98,13 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
+                    Auth authHandler = new Auth();
                     // Validate the form before proceeding with login
                     if (_formKey.currentState!.validate()) {
-                      _login();
+                      authHandler.handleSignInEmail(_emailController.text, _passwordController.text)
+                      .then((user) {
+                            Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                      }).catchError((e) => print(e));
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -154,15 +160,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _login() {
-    // Implement your authentication logic here
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    // TODO: Integrate with backend authentication service.
-    // Validate credentials and navigate to the next screen if valid.
-
-    // For simplicity, this example just prints the credentials.
-    print('Email: $email, Password: $password');
-  }
 }
