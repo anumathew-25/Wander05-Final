@@ -106,17 +106,4 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
-
-  void _signup() {
-    // Implement your user registration logic here
-    String name = _nameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    // TODO: Integrate with backend service for user registration.
-    // Validate input, create user account, and handle any errors.
-
-    // For simplicity, this example just prints the registration details.
-    print('Name: $name, Email: $email, Password: $password');
-  }
 }
