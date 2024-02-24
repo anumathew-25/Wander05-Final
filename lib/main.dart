@@ -1,17 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:wander05/firebase_options.dart';
-import 'package:wander05/login.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:wander05_final/firebase_options.dart';
+import 'package:wander05_final/itinerary.dart';
+import 'package:wander05_final/login.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async{
+  runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -60,7 +63,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Wander05',
           style: TextStyle(
             color: Colors.white, // Set text color
@@ -71,7 +74,7 @@ class HomePage extends StatelessWidget {
         elevation: 4, // Add elevation (shadow)
         actions: [
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white), // Set icon color
+            icon: const Icon(Icons.search, color: Colors.white), // Set icon color
             onPressed: () {
               // Navigate to user profile page
             },
@@ -90,12 +93,12 @@ class HomePage extends StatelessWidget {
                 aspectRatio: 16 / 9,
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enableInfiniteScroll: true,
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 viewportFraction: 0.8,
               ),
               itemBuilder: (BuildContext context, int index, int realIndex) {
                 return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
@@ -106,7 +109,7 @@ class HomePage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       featureTexts[index],
-                      style: TextStyle(fontSize: 25.0, color: Colors.white),
+                      style: const TextStyle(fontSize: 25.0, color: Colors.white),
                     ),
                   ),
                 );
@@ -115,22 +118,22 @@ class HomePage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'Hi user, where do you want to go?',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-                TextField(
+                const SizedBox(height: 20),
+                const TextField(
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     hintText: 'Search places',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
               width: double.infinity, // Take full width of the screen
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/main5.jpg'),
                   fit: BoxFit.cover, // Cover the full container area
@@ -139,7 +142,7 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Plan your next trip', // Removed the "with zero effort" part for simplicity
                     style: TextStyle(
                       fontSize: 32, // Increased font size for a stronger emphasis
@@ -147,34 +150,33 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20), // Add spacing between text and button
-                  Text(
+                  const SizedBox(height: 20), // Add spacing between text and button
+                  const Text(
                     'With our easy-to-use app, planning your next adventure is a breeze!',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 40), // Increase spacing between text and button
+                  const SizedBox(height: 40), // Increase spacing between text and button
                   ElevatedButton(
                     onPressed: () {
-                      // Handle button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Itinerary()));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                      minimumSize: MaterialStateProperty.all<Size>(Size(30, 60)),
+                      minimumSize: MaterialStateProperty.all<Size>(const Size(30, 60)),
                   
                       // Set button width and increased height
                     ),
-                    child: Container(
-                      height: 60, // Increase button height
-                      child: Center(
-                        child: Text(
-            'Plan my Trip',
-            style: TextStyle(
-              fontSize: 20, // Increased button text size
-            ),
+                    child: const Center(
+                      child: Text(
+                        'Plan my Trip',
+                        style: TextStyle(
+                          fontSize: 20, // Increased button text size
                         ),
                       ),
                     ),
@@ -184,12 +186,12 @@ class HomePage extends StatelessWidget {
             ),
             
             
-                SizedBox(height: 40),
-                Text(
+                const SizedBox(height: 40),
+                const Text(
                   'Weekend trips near you',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 CarouselSlider.builder(
                   itemCount: weekendTrips.length,
                   options: CarouselOptions(
@@ -199,14 +201,14 @@ class HomePage extends StatelessWidget {
                     aspectRatio: 16 / 9,
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enableInfiniteScroll: true,
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
                     viewportFraction: 0.8,
                   ),
                   itemBuilder: (BuildContext context, int index, int realIndex) {
                     return Stack(
                       children: [
                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
                             image: DecorationImage(
@@ -219,7 +221,7 @@ class HomePage extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: Container(
-                              padding: EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
             
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -227,9 +229,9 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   Text(
                                     weekendTrips[index]['name'],
-                                    style: TextStyle(fontSize: 20, color: Colors.white),
+                                    style: const TextStyle(fontSize: 20, color: Colors.white),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   ElevatedButton(
                                     onPressed: () {
                                       // Handle button press
@@ -238,7 +240,7 @@ class HomePage extends StatelessWidget {
                                       backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                                       foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                     ),
-                                    child: Text('Explore'),
+                                    child: const Text('Explore'),
                                   ),
                                 ],
                               ),
@@ -255,13 +257,13 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Color.fromARGB(255, 2, 4, 121),
-        items: [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.map, title: 'My Trips'),
-          TabItem(icon: Icons.add, title: 'New Trip'),
-          TabItem(icon: Icons.hotel, title: 'Bookings'),
-          TabItem(icon: Icons.people, title: 'Profile'),
+        backgroundColor: const Color.fromARGB(255, 2, 4, 121),
+        items: const [
+           TabItem(icon: Icons.home, title: 'Home'),
+           TabItem(icon: Icons.map, title: 'My Trips'),
+           TabItem(icon: Icons.add, title: 'New Trip'),
+           TabItem(icon: Icons.hotel, title: 'Bookings'),
+           TabItem(icon: Icons.people, title: 'Profile'),
         ],
         onTap: (int i) => print('click index=$i'),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wander05/auth.dart';
-import 'package:wander05/main.dart';
-import 'package:wander05/signup.dart';
+import 'package:wander05_final/auth.dart';
+import 'package:wander05_final/signup.dart';
 
 void main() {
   runApp(MyApp());
@@ -159,6 +158,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
 }
-=======
