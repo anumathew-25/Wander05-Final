@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:wander05_final/auth.dart';
+
+
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -84,8 +87,12 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
+                      Auth authHandler = new Auth();
                       // Implement your user registration logic here
-                      _signup();
+                      authHandler.handleSignUp(_emailController.text, _passwordController.text)
+                      .then((user) {
+                            Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                      }).catchError((e) => print(e));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.teal, // Set the button color to teal
@@ -99,18 +106,5 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
-  }
-
-  void _signup() {
-    // Implement your user registration logic here
-    String name = _nameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-
-    // TODO: Integrate with backend service for user registration.
-    // Validate input, create user account, and handle any errors.
-
-    // For simplicity, this example just prints the registration details.
-    print('Name: $name, Email: $email, Password: $password');
   }
 }
