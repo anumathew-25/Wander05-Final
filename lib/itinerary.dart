@@ -16,7 +16,7 @@ class _ItineraryState extends State<Itinerary> {
   final String apiUrl = "https://api.openai.com/v1/chat/completions";
 
   // Replace 'YOUR_API_KEY' with your actual OpenAI API key
-  final String apiKey = "API Key Here";
+  final String apiKey = "api key";
 
   // Function to make the POST request to the OpenAI API
   Future<void> fetchResponse(String destinationCountry, String budget, String travelStyle, String interestsNew, String accommodationType, String transportationType, String activityType,String cuisineType, String tripDuration, String language ) async {
